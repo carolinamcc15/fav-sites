@@ -9,7 +9,8 @@ const Form = () => {
         setValue(e.target.value);
     }
 
-    const onSubmitHandler = async (e) => {        
+    const onSubmitHandler = async (e) => {
+        e.preventDefault();        
         try {
             await SiteServices.addSite(favInput, urlInput);
         }

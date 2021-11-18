@@ -29,7 +29,20 @@ services.addSite = async (title, url) => {
     if(response.ok) {
         console.log("Sitio creado");
     }
-    console.log(await response.json());
+}
+
+services.deleteSite = async (id) => {
+    const response = await fetch(`${BASE_URL}/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    console.log(response);
+    if(response.ok) {
+        console.log("Sitio eliminado");
+    }
 }
 
 export default services
