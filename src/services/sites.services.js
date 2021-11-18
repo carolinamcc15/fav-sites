@@ -39,9 +39,26 @@ services.deleteSite = async (id) => {
         }
     });
 
-    console.log(response);
     if(response.ok) {
         console.log("Sitio eliminado");
+    }
+}
+
+services.editSite = async (id, title, url) => {
+    const response = await fetch(`${BASE_URL}/edit/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            title: title,
+            url: url
+        })
+    });
+    console.log(response);
+
+    if(response.ok) {
+        console.log("Sitio modificado exitosamente");
     }
 }
 
