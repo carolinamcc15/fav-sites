@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SiteServices from "../../services/sites.services";
 
 const Form = () => {
     const [favInput, setFavInput] = useState("");
@@ -8,10 +9,13 @@ const Form = () => {
         setValue(e.target.value);
     }
 
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        
-        // API logic
+    const onSubmitHandler = async (e) => {        
+        try {
+            await SiteServices.addSite(favInput, urlInput);
+        }
+        catch(error) {
+            console.log(error);
+        }
 
         setFavInput("");
         setUrlInput("");
