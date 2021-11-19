@@ -1,19 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SiteServices from "../../services/sites.services";
 
 const EditForm = ({ site, fetchSites, clearEdit }) => {
-    const [favInput, setFavInput] = useState(site.title);
-    const [urlInput, setUrlInput] = useState(site.url);
+    const [favInput, setFavInput] = useState("");
+    const [urlInput, setUrlInput] = useState("");
 
     const onChangeHandler = (e, setValue) => {
         setValue(e.target.value);
     }
 
+    useEffect(() => {
+        setFavInput(site.title);
+        setUrlInput(site.url);
+    }, [site]);
+
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
         try {
-            console.log(site);
             await SiteServices.editSite(site._id, favInput, urlInput);
             await fetchSites();
         }

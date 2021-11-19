@@ -38,7 +38,13 @@ function App() {
     const editing = sites.filter(site => site._id === id);
     const siteObj = editing[0];
   
-    editMode ? setEditMode(false) : setEditMode(true);
+    if(!editMode) {
+      setEditMode(true);
+    }
+    else if(editMode && editSite === siteObj._id ) {
+      setEditMode(false);
+    }
+
     setEditSite(siteObj);
   }
 
