@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 function App() {
   const [sites, setSites] = useState([]);
   const [editMode, setEditMode] = useState(false);
-  const [editSite, setEditSite] = useState({})
+  const [editSite, setEditSite] = useState({});
 
   const fetchSites = async () => {
     try {
@@ -38,13 +38,11 @@ function App() {
     const editing = sites.filter(site => site._id === id);
     const siteObj = editing[0];
   
-    //(editMode) ? setEditMode(false) : setEditMode(true);
-
-    setEditMode(true);
+    editMode ? setEditMode(false) : setEditMode(true);
     setEditSite(siteObj);
   }
 
-  const clearEdit = () => {
+  const clearEdit = async () => {
     setEditMode(false);
     setEditSite("");
   }

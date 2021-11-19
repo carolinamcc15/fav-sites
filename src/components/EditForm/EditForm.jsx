@@ -14,9 +14,8 @@ const EditForm = ({ site, fetchSites, clearEdit }) => {
 
         try {
             console.log(site);
-            await SiteServices.editSite(site._id, { title: favInput, url: urlInput });
-            clearEdit();
-            fetchSites();
+            await SiteServices.editSite(site._id, favInput, urlInput);
+            await fetchSites();
         }
         catch (error) {
             console.log(error);
@@ -24,6 +23,7 @@ const EditForm = ({ site, fetchSites, clearEdit }) => {
 
         setFavInput("");
         setUrlInput("");
+        await clearEdit();
     }
 
     return (
