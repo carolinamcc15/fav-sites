@@ -9,7 +9,7 @@ const Card = ({ site, onEditHandler, onDeleteHandler }) => {
                 className="text-sm py-1 px-2 text-white bg-red-400 hover:bg-red-500 transition duration-300 rounded-tr"
                 onClick={ () => { onDeleteHandler(site._id) } }>DELETE</button>
         </div>
-        <a href={ site.url }>
+        <a href={ site.url } target="_blank" rel="noreferrer">
             <h2 className="px-2 md:px-4 font-semibold ">{ site.title }</h2>
         </a>
     </li>
