@@ -17,17 +17,23 @@ const EditForm = ({ site, fetchSites, clearEdit }) => {
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
-        try {
-            await SiteServices.editSite(site._id, favInput, urlInput);
-            await fetchSites();
+        if(favInput && urlInput ) {
+            try {
+                await SiteServices.editSite(site._id, favInput, urlInput);
+                await fetchSites();
+            }
+            catch (error) {
+                console.log(error);
+            }
+    
+            setFavInput("");
+            setUrlInput("");
+            await clearEdit();
         }
-        catch (error) {
-            console.log(error);
+        else {
+            alert("Some fields are empty");
         }
-
-        setFavInput("");
-        setUrlInput("");
-        await clearEdit();
+        
     }
 
     return (
@@ -37,12 +43,12 @@ const EditForm = ({ site, fetchSites, clearEdit }) => {
                 <div className="flex flex-col w-full">
                     <label for="fav-name" className="text-sm">Title</label>
                     <input id="fav-name" className="mt-1 p-2 focus:outline-none focus:ring focus:ring-indigo-300 rounded shadow"
-                        type="text" name="fav-name" onChange={e => onChangeHandler(e, setFavInput)} value={ favInput } placeholder="Fav search engine" />
+                        type="text" name="fav-name" onChange={e => onChangeHandler(e, setFavInput)} value={ favInput } placeholder="Fav search engine" required/>
                 </div>
                 <div className="flex flex-col w-full">
                     <label for="fav-name" className="text-sm">URL</label>
                     <input className="mt-1 p-2 focus:outline-none focus:ring focus:ring-indigo-300 rounded shadow"
-                        type="url" name="fav-url" onChange={e => onChangeHandler(e, setUrlInput)} value={ urlInput } placeholder="www.google.com" />
+                        type="url" name="fav-url" onChange={e => onChangeHandler(e, setUrlInput)} value={ urlInput } placeholder="www.google.com" required/>
                 </div>
                 <button className="px-7 py-2 bg-indigo-500 text-white font-semibold uppercase rounded hover:bg-indigo-600 transition duration-300"
                     type="submit">Save</button>
